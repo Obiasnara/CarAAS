@@ -38,7 +38,8 @@ import com.google.gson.Gson;
 
 public class ConnectedDevices {
 	
-	public final MQTTConnectorWrapper mqtt_endpoint;
+	public static final MQTTConnectorWrapper mqtt_endpoint = MQTTConnectorWrapper.getInstance();
+	public static final MongoDbWrapper mongo_endpoint = MongoDbWrapper.getInstance();
 	// Static JSON parser
 	public static final Gson JsonObject = new Gson();
 	
@@ -48,7 +49,13 @@ public class ConnectedDevices {
 	 * @throws Exception If any exception occurs during the creation of the connectors. 
 	 */
 	public ConnectedDevices() throws Exception {
-		mqtt_endpoint = MQTTConnectorWrapper.getInstance();
+		// MONGO DB PART
+		MongoDbWrapper.getInstance().setHost("localhost");
+		MongoDbWrapper.getInstance().setPort(27017);
+		MongoDbWrapper.getInstance().setDatabase("admin");
+		MongoDbWrapper.getInstance().setUsername("root");
+		MongoDbWrapper.getInstance().setPassword("example");
+		MongoDbWrapper.getInstance().connect();					
 	}
 	
 	/**

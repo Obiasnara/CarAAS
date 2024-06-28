@@ -194,10 +194,12 @@ public class DynamicElementsWorkspace {
 		
 		if(!value.isEmpty() ) {
 			JsonObject jsonObject = ConnectedDevices.JsonObject.fromJson(value, JsonObject.class);
+			Battery_Values.add(new Property("Time", System.currentTimeMillis()));
 			Battery_Values.add(new Property("Left_IDR", jsonObject.get("Left_IDR").getAsFloat()));
 			Battery_Values.add(new Property("Right_IDR", jsonObject.get("Right_IDR").getAsFloat()));
 			Battery_Values.add(new Property("Power", jsonObject.get("Power").getAsFloat()));
 		} else {
+			Battery_Values.add(new Property("Time", System.currentTimeMillis()));
 			Battery_Values.add(new Property("Left_IDR", 0.0));
 			Battery_Values.add(new Property("Right_IDR", 0.0));
 			Battery_Values.add(new Property("Power", 0.0));
@@ -218,11 +220,13 @@ public class DynamicElementsWorkspace {
 		
 		if(!value.isEmpty() ) {
 			JsonObject jsonObject = ConnectedDevices.JsonObject.fromJson(value, JsonObject.class);
+			Engines_Values.add(new Property("Time", System.currentTimeMillis()));
 			Engines_Values.add(new Property("Left_Front_Engine_Value", jsonObject.get("Left_Front_Engine_Value").getAsInt()));
 			Engines_Values.add(new Property("Left_Back_Engine_Value", jsonObject.get("Left_Back_Engine_Value").getAsInt()));
 			Engines_Values.add(new Property("Right_Front_Engine_Value", jsonObject.get("Right_Front_Engine_Value").getAsInt()));
 			Engines_Values.add(new Property("Right_Back_Engine_Value", jsonObject.get("Right_Back_Engine_Value").getAsInt()));
 		} else {
+			Engines_Values.add(new Property("Time", System.currentTimeMillis()));
 			Engines_Values.add(new Property("Left_Front_Engine_Value", 0));
 			Engines_Values.add(new Property("Left_Back_Engine_Value", 0));
 			Engines_Values.add(new Property("Right_Front_Engine_Value", 0));
@@ -326,8 +330,10 @@ public class DynamicElementsWorkspace {
 		
 		if(!value.isEmpty() ) {
 			JsonObject jsonObject = ConnectedDevices.JsonObject.fromJson(value, JsonObject.class);
+			Ultrasonic_Values.add(new Property("Time", System.currentTimeMillis()));
 			Ultrasonic_Values.add(new Property("Distance", jsonObject.get("Distance").getAsInt()));
 		} else {
+			Ultrasonic_Values.add(new Property("Time", System.currentTimeMillis()));
 			Ultrasonic_Values.add(new Property("Distance", 0));
 		}
 		return Ultrasonic_Values;
@@ -346,9 +352,10 @@ public class DynamicElementsWorkspace {
 
 		if(!value.isEmpty() ) {
 			JsonObject jsonObject = ConnectedDevices.JsonObject.fromJson(value, JsonObject.class);
+			Video_Values.add(new Property("Time", System.currentTimeMillis()));
 			Video_Values.add(new Property("Video_Rtmp_Url", jsonObject.get("Video_Rtmp_Url").getAsString()));
-			
 		} else {
+			Video_Values.add(new Property("Time", System.currentTimeMillis()));
 			Video_Values.add(new Property("Video_Rtmp_Url", ""));
 		}
 		return Video_Values;
@@ -384,6 +391,7 @@ public class DynamicElementsWorkspace {
 			JsonObject jsonObject = ConnectedDevices.JsonObject.fromJson(value, JsonObject.class);
 			
 			try{
+				CPU_Values.add(new Property("Time", System.currentTimeMillis()));
 				CPU_Values.add(new Property("pids", jsonObject.get("pids").getAsJsonArray().toString()));
 				CPU_Values.add(new Property("most_cpu_intensive_processes", jsonObject.get("most_cpu_intensive_processes").getAsJsonArray().toString()));
 				CPU_Values.add(new Property("cpu_percent", jsonObject.get("cpu_percent").getAsFloat()));
@@ -406,6 +414,7 @@ public class DynamicElementsWorkspace {
 			}
 
 		} else {
+			CPU_Values.add(new Property("Time", System.currentTimeMillis()));
 			CPU_Values.add(new Property("pids", ""));
 			CPU_Values.add(new Property("most_cpu_intensive_processes", ""));
 			CPU_Values.add(new Property("cpu_percent", "0.0"));

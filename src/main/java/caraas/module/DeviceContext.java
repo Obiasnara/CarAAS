@@ -38,7 +38,7 @@ public final class DeviceContext {
 		models.getSubmodels().forEach((sm) -> {
 			aasProvider.addSubmodel(new SubmodelProvider(sm.getSubmodel()));
 		});
-		
+
 		HttpServlet servlet = new VABHTTPInterface<IModelProvider>(aasProvider);
 		context.addServletMapping("/*", servlet);
 		

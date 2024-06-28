@@ -1,53 +1,19 @@
 package caraas.connection;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 // Pair
-
-
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.apache.tomcat.util.json.JSONParser;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 public final class MQTTConnectorWrapper {
-
-    protected class Pair<K, V> {
-        private K key;
-        private V value;
-    
-        public Pair(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-    
-        public K getKey() {
-            return key;
-        }
-    
-        public V getValue() {
-            return value;
-        }
-
-        public void setKey(K key) {
-            this.key = key;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
-    }
-    
 
     private static final MQTTConnectorWrapper INSTANCE;
 
@@ -80,13 +46,13 @@ public final class MQTTConnectorWrapper {
     // Save channel and last value
     private final Map<String, Pair<String, Long>> subscribedChannels = new HashMap<>();
 
+
     private MQTTConnectorWrapper() {
 
         qos          = 2;
         broker       = "tcp://157.245.38.231:1883";
         clientId     = "JavaSample";
         persistence = new MemoryPersistence();    
-
         try {
             sampleClient = new MqttClient(broker, clientId, persistence);
             connOpts = new MqttConnectOptions();
@@ -129,6 +95,7 @@ public final class MQTTConnectorWrapper {
             System.out.println("excep "+me);
             me.printStackTrace();
         }
+       
     }
 
     private void connect() throws MqttException {
@@ -143,7 +110,10 @@ public final class MQTTConnectorWrapper {
             Pair<String, Long> pair = subscribedChannels.get(channel);
             pair.setKey(content);
             pair.setValue(System.currentTimeMillis());
+            MongoDbWrapper.getInstance().insert(channel, pair);
         } 
+
+
     }
 
     public void publish(String topic, String content, int qos) {
@@ -187,6 +157,10 @@ public final class MQTTConnectorWrapper {
         String channel = path;
         System.out.println("Writing value \""+value+"\" to channel \""+channel+"\"");
         publish(channel, value, qos);
+    }
+
+    public Map<String, Pair<String, Long>> getSubscribedChannels() {
+        return subscribedChannels;
     }
 
     @Override

@@ -77,6 +77,7 @@ public class AASServer extends BaSyxHTTPServer {
 		
 		BaSyxContext context = DeviceContext.forModels(models);
 		AASServer app = new AASServer(context);
+		ConnectedDevices.mongo_endpoint.generateOrConnectToCollections();
 		app.start();
 		
 		if (app.hasEnded()) {
