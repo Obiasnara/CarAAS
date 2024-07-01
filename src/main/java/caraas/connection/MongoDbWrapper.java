@@ -136,6 +136,12 @@ public final class MongoDbWrapper {
 
     public void disconnect() {
         // Disconnect from MongoDB
+        try {
+            this.mongoClient.close();
+            System.out.println("Disconnected from MongoDB");
+        } catch (MongoException me) {
+            System.err.println(me);
+        }
     }
 
     public void insert(String collection, Pair<String, Long> pair) {
@@ -150,109 +156,6 @@ public final class MongoDbWrapper {
         } catch (MongoException me) {
             System.err.println(me);
         }
-    }
-
-    public void update(String collection, String json) {
-        // Update data in MongoDB
-    }
-
-    public void delete(String collection, String json) {
-        // Delete data from MongoDB
-    }
-
-    public String find(String collection, String json) {
-        // Find data in MongoDB
-        return null;
-    }
-
-    public String findAll(String collection) {
-        // Find all data in MongoDB
-        return null;
-    }
-
-    public String find(String collection, String json, String projection) {
-        // Find data in MongoDB with projection
-        return null;
-    }
-
-    public String find(String collection, String json, String projection, String sort) {
-        // Find data in MongoDB with projection and sort
-        return null;
-    }
-
-    public String find(String collection, String json, String projection, String sort, int limit) {
-        // Find data in MongoDB with projection, sort and limit
-        return null;
-    }
-
-    public String find(String collection, String json, String projection, String sort, int limit, int skip) {
-        // Find data in MongoDB with projection, sort, limit and skip
-        return null;
-    }
-
-    public String aggregate(String collection, String json) {
-        // Aggregate data in MongoDB
-        return null;
-    }
-
-    public String aggregate(String collection, String json, int limit) {
-        // Aggregate data in MongoDB with limit
-        return null;
-    }
-
-    public String aggregate(String collection, String json, int limit, int skip) {
-        // Aggregate data in MongoDB with limit and skip
-        return null;
-    }
-
-    public String aggregate(String collection, String json, int limit, int skip, int batchSize) {
-        // Aggregate data in MongoDB with limit, skip and batch size
-        return null;
-    }
-
-    public String createCollection(String collection) {
-        // Create collection in MongoDB
-        return null;
-    }
-
-    public String dropCollection(String collection) {
-        // Drop collection in MongoDB
-        return null;
-    }
-
-    public String createIndex(String collection, String json) {
-        // Create index in MongoDB
-        return null;
-    }
-
-    public String dropIndex(String collection, String json) {
-        // Drop index in MongoDB
-        return null;
-    }
-
-    public String listIndexes(String collection) {
-        // List indexes in MongoDB
-        return null;
-    }
-
-    public String createDatabase(String database) {
-        // Create database in MongoDB
-        return null;
-    }
-
-    public String dropDatabase(String database) {
-        // Drop database in MongoDB
-        return null;
-    }
-
-    public String listDatabases() {
-        // List databases in MongoDB
-        return null;
-    }
-
-    public String listCollections() {
-        // List collections in MongoDB
-        return null;
     }
 
 

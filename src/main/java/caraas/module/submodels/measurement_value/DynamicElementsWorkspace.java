@@ -14,6 +14,9 @@
 package caraas.module.submodels.measurement_value;
 
 import caraas.connection.ConnectedDevices;
+import caraas.connection.MongoDbWrapper;
+import caraas.connection.Pair;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,8 +34,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mongodb.client.FindIterable;
+import com.nimbusds.jose.shaded.json.JSONObject;
 
 import org.eclipse.basyx.submodel.metamodel.api.submodelelement.ISubmodelElement;
+import org.bson.Document;
 import org.eclipse.basyx.submodel.metamodel.api.reference.enums.KeyType;
 import org.eclipse.basyx.submodel.metamodel.map.reference.Key;
 import org.eclipse.basyx.submodel.metamodel.map.reference.Reference;
